@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aircraft Incidents</title>
+		<meta charset="utf-8" />
+		<script src="main.js"></script>
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
+    <style type="text/css">
+        .leaflet-container{background-color:white;}
+    </style>
+</head>
+
+<body>
+    <div id="map" style="width: 1000px; height: 700px"></div>
+  
+    <script>
+        var myGeoJSONPath = '/data/custom.geo.json';
+        var myCustomStyle = {
+            stroke: false,
+            fill: true,
+            fillColor: 'light-blue',
+            fillOpacity: 1
+        }
+        $.getJSON(myGeoJSONPath,function(data){
+            var map = L.map('map').setView([-10.74739, -40], 1.3);
+
+            L.geoJson(data, {
+                clickable: false,
+                style: myCustomStyle
+            }).addTo(map);
+        })
+    </script>
+</body>
+</html>
+
