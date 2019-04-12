@@ -19,9 +19,9 @@ function start() {
 // Width and Height of the whole visualization
 // Set Projection Parameters
     var mapProjection = d3.geoMercator()
-        .scale(50)
-        .rotate([00, 0])
-        .center([0, 0])
+        .scale(120)
+        .rotate([0, 0])
+        .center([50, 50])
         .translate([width / 2, height / 2]);
 
 // Create GeoPath function that uses built-in D3 functionality to turn
