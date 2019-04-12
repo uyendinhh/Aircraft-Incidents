@@ -6,7 +6,7 @@ function start() {
     var height = 800;
 
 // Create SVG
-    var body = document.getElementById('graph');
+    var body = document.getElementById('graph1');
     var svg = d3.select(body)
         .append("svg")
         .attr("width", width)

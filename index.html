@@ -1,42 +1,35 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
+    <meta charset="utf-8" />
     <title>Aircraft Incidents</title>
-    <meta charset="utf-8"/>
-    <script src="main.js"></script>
-    <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+    <script src="graph1.js"></script>
+    <script src="graph2.js"></script>
+    <script src="graph3.js"></script>
     <script src="http://d3js.org/d3.v4.min.js"></script>
     <script src="./data/custom.geo.json"></script>
-    <meta content="utf-8" http-equiv="encoding">
     <script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css"/>
-    <style type="text/css">
-        .leaflet-container {
-            background-color: white;
-        }
-    </style>
-</head>
-
-<body>
-<div id="graph" style="width: 1000px; height: 700px"></div>
-
-<script>
-    // var myGeoJSONPath = '/data/custom.geo.json';
-    // var myCustomStyle = {
-    //     stroke: false,
-    //     fill: true,
-    //     fillColor: 'light-blue',
-    //     fillOpacity: 1
-    // }
-    // $.getJSON(myGeoJSONPath,function(data){ß
-    //     var map = L.map('map').setView([-10.74739, -40], 1.3);
-
-    //     L.geoJson(data, {
-    //         clickable: true,
-    //         style: myCustomStyle
-    //     }).addTo(map);
-    // })
-</script>
-</body>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"
+      integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Aircraft Incidents</h1>
+      <h2>Graph 1 Title</h2>
+      <p>Graph 1 description</p>
+      <div id="graph1" style="width: 1000px; height: 700px"></div>
+      <div id="graph2"></div>
+      <h2>Graph 2 Title</h2>
+      <p>Graph 2 description</p>
+      <div id="graph3"></div>
+      <h2>Graph 3 Title</h2>
+      <p>Graph 3 description</p>
+    </div>
+  </body>
 </html>
-
