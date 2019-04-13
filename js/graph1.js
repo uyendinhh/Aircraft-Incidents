@@ -17,38 +17,8 @@ function start() {
   // g will contain geometry elements
   var g = svg.append("g");
 
-  var dataTime = d3.range(0, 10).map(function(d) {
-    return new Date(1995 + d, 10, 3);
-  });
-
-  var sliderTime = d3
-    .sliderBottom()
-    .min(d3.min(dataTime))
-    .max(d3.max(dataTime))
-    .step(1000 * 60 * 60 * 24 * 365)
-    .width(width - 200)
-    .tickFormat(d3.timeFormat("%Y"))
-    .tickValues(dataTime)
-    .default(new Date(1998, 10, 3))
-    .on("onchange", val => {
-      d3.select("p#value-time").text(d3.timeFormat("%Y")(val));
-    });
-
-  var gTime = d3
-    .select("div#slider-time")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", 100)
-    .append("g")
-    .attr("transform", "translate(30,30)");
-
-  gTime.call(sliderTime);
-
-  d3.select("p#value-time").text(d3.timeFormat("%Y")(sliderTime.value()));
-
-
   var tooltip = d3
-    .select("body")
+    .select(body)
     .append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
@@ -98,6 +68,35 @@ function start() {
 
     .await(ready);
 
+  var dataTime = d3.range(0, 10).map(function(d) {
+    return new Date(1995 + d, 10, 3);
+  });
+
+  var sliderTime = d3
+    .sliderBottom()
+    .min(d3.min(dataTime))
+    .max(d3.max(dataTime))
+    .step(1000 * 60 * 60 * 24 * 365)
+    .width(width - 200)
+    .tickFormat(d3.timeFormat("%Y"))
+    .tickValues(dataTime)
+    .default(new Date(1998, 10, 3))
+    .on("onchange", val => {
+      d3.select("p#value-time").text(d3.timeFormat("%Y")(val));
+    });
+
+  var gTime = d3
+    .select("div#slider-time")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", 100)
+    .append("g")
+    .attr("transform", "translate(30,30)");
+
+  gTime.call(sliderTime);
+
+  d3.select("p#value-time").text(d3.timeFormat("%Y")(sliderTime.value()));
+
   function ready(error, topo) {
     // Draw the map
     var countries = svg
@@ -110,7 +109,7 @@ function start() {
       .attr("d", d3.geoPath().projection(mapProjection))
       // set the color of each country
       .attr("fill", function(d) {
-        d.total = data.get(d.properties.name) || 0;
+        d.total = data.has(d.properties.name) ? data.get(d.properties.name) : 0;
         return colorScale(d.total);
       })
       .on("mouseover", function(d) {
@@ -120,7 +119,7 @@ function start() {
           .attr("transform", "translate(0, 100)")
           .style("opacity", 0.9);
         tooltip
-          .html(d.properties.name + " " + data.get(d.properties.name))
+          .html(d.properties.name + " " + (data.has(d.properties.name) ? data.get(d.properties.name) : 0))
           .attr("x", 200)
           .style("left", d3.event.pageX + "px")
           .style("top", d3.event.pageY + "px");
