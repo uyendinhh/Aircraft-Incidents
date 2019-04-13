@@ -143,10 +143,11 @@ d3.csv("data/aircraft_incidents.csv", function(csv) {
 
   gStep.call(sliderStep);
 
-  d3.selectAll(".tick")
+  
+  gStep.selectAll(".tick")
     .selectAll("text")
     .remove();
-  d3.select(".parameter-value")
+  gStep.select(".parameter-value")
     .select("text")
     .remove();
 });
