@@ -55,10 +55,8 @@ function start() {
     d3.queue()
         .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
         .defer(d3.csv, "./data/aircraft_incidents.csv", function (d) {
-
-            data.set(d.Country, parseInt(d.Total_Fatal_Injuries + data.get(d.Country)));
-
-            // console.log(d.Country + " " +d.Total_Fatal_Injuries);
+            var countryValue = data.has(d.Country) ? parseInt(data.get(d.Country)) : 0;
+            data.set(d.Country, parseInt(d.Total_Fatal_Injuries) + countryValue);
         })
 
         .await(ready);
