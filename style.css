@@ -13,4 +13,21 @@ div.tooltip {
   background:white; 
   border: 0px;        
   pointer-events: none;     
+  border: 0.8px solid gray;
+}
+
+.body {
+  /* position:center; */
+  /* display: block; */
+  /* position: absolute; */
+ 
+  top: 50%;
+  left: 50%;
+
+}
+
+#graph {
+  margin: 2% 10% 2% 10%;
+  top: 50%;
+  left: 50%;
 }

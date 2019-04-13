@@ -1,9 +1,10 @@
 window.onload = start;
 
 function start() {
+
     // Width and Height of the whole visualization
-    var width = 1250;
-    var height = 800;
+    var width = 1200;
+    var height = 600;
 
     // Create SVG
     var body = document.getElementById('graph');
@@ -16,8 +17,8 @@ function start() {
     // g will contain geometry elements
     var g = svg.append("g");
 
-    var tooltip = d3.select("body").append("div") 
-        .attr("class", "tooltip")       
+    var tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
         .style("opacity", 0);
 
 
@@ -29,42 +30,28 @@ function start() {
         .center([50, 50])
         .translate([width / 2, height / 2]);
 
-    // Create GeoPath function that uses built-in D3 functionality to turn
-    // lat/lon coordinates into screen coordinates
-    // var geoPath = d3.geoPath()
-    //     .projection(mapProjection);
-
-
-    // Classic D3... Select non-existent elements, bind the data, append the elements, and apply attributes
-    // g.selectAll("path")
-    //     .data(neighborhoods_json.features)
-    //     .enter()
-    //     .append("path")
-    //     .attr("fill", "#ccc")
-    //     .attr("stroke", "#333")
-    //     .attr("d", geoPath);
-
 
     // Load external data and boot
     // Data and color scale
     var data = d3.map();
     var colorScale = d3.scaleThreshold()
-        .domain([0, 20, 50, 100, 1000, 10000, 100000, 10000000, 500000000])
-        .range(d3.schemeBlues[7]);
+        .domain([0, 50, 100, 200, 300, 500, 800, 1000])
+        .range(d3.schemeBlues[8]);
 
     d3.queue()
         .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
         .defer(d3.csv, "./data/aircraft_incidents.csv", function (d) {
-
-            data.set(d.Country, parseInt(d.Total_Fatal_Injuries + data.get(d.Country)));
-
-            // console.log(d.Country + " " +d.Total_Fatal_Injuries);
+            if (!isNaN(data.get(d.Country))) {
+                var oldFatal = data.get(d.Country);
+            } else {
+                var oldFatal = 0;
+            }
+            data.set(d.Country, parseInt(oldFatal) + parseInt(d.Total_Fatal_Injuries));
         })
 
         .await(ready);
 
     function ready(error, topo) {
-
         // Draw the map
         var countries = svg.append("g")
             .selectAll("path")
@@ -80,28 +67,39 @@ function start() {
                 d.total = data.get(d.properties.name) || 0;
                 return colorScale(d.total);
             })
-            .on("mouseover", function(d) {    
-                tooltip.transition()    
-                .duration(200)    
-                .attr("transform", "translate(0, 100)")
-                .style("opacity", .9)    
-                tooltip.html(d.properties.name + " " + data.get(d.properties.name))
-                .attr("x", 200)
-                .style("left", (d3.event.pageX) + "px")   
-                .style("top", (d3.event.pageY) + "px"); 
-              })          
-              .on("mouseout", function(d) {   
-                tooltip.transition()    
-                .duration(700)    
-                .style("opacity", 0); 
-              })
+            .on("mouseover", function (d) {
+                tooltip.transition()
+                    .duration(200)
+                    .attr("transform", "translate(0, 100)")
+                    .style("opacity", .9)
+                tooltip.html(d.properties.name + " " + nFormatter(data.get(d.properties.name)))
+                    .attr("x", 200)
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY) + "px");
+            })
+            .on("mouseout", function (d) {
+                tooltip.transition()
+                    .duration(700)
+                    .style("opacity", 0);
+            })
             .style("stroke", "white");
-        
+
+
+        function nFormatter(num) {
+            if (num === undefined) {
+                return 0;
+            }
+            else if (num >= 1000000) {
+                return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+            }
+            else if (num >= 1000) {
+                return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+            }
+            return num;
+        }
+
 
     }
-   
-
-
 
 
 }
