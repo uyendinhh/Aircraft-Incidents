@@ -58,7 +58,7 @@ d3.csv("data/aircraft_incidents.csv", function(csv) {
 
   var background = graphic
     .append("image")
-    .attr("xlink:href", "../assets/background.png")
+    .attr("xlink:href", "assets/background.png")
     .attr("x", 0)
     .attr("y", -500)
     .attr("width", width)
@@ -66,7 +66,7 @@ d3.csv("data/aircraft_incidents.csv", function(csv) {
 
   var plane = graphic
     .append("image")
-    .attr("xlink:href", "../assets/plane.svg")
+    .attr("xlink:href", "assets/plane.svg")
     .attr("width", planeWidth)
     .attr("height", planeHeight)
     .attr("x", planeXScale(0))
