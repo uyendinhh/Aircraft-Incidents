@@ -85,7 +85,43 @@ d3.csv("data/aircraft_incidents.csv", function(csv) {
       var starG = svg
         .append("g")
         .datum(models[model].value)
-        .call(star);
+        .call(star)
+        .call(star.interaction);
+
+      var interactionLabel = wrapper
+        .append("div")
+        .attr("class", "interaction label");
+
+      var circle = svg
+        .append("circle")
+        .attr("class", "interaction circle")
+        .attr("r", 5);
+
+      var interaction = wrapper
+        .selectAll(".interaction")
+        .style("display", "none");
+
+      svg
+        .selectAll(".star-interaction")
+        .on("mouseover", function(d) {
+          svg.selectAll(".star-label").style("display", "none");
+
+          interaction.style("display", "block");
+
+          circle.attr("cx", d.x).attr("cy", d.y);
+
+          $interactionLabel = $(interactionLabel.node());
+          interactionLabel
+            .text(d.key + ": " + d.datum[d.key])
+            .style("left", d.xExtent - $interactionLabel.width() / 2)
+            .style("top", d.yExtent - $interactionLabel.height() / 2);
+        })
+        .on("mouseout", function(d) {
+          interaction.style("display", "none");
+
+          svg.selectAll(".star-label").style("display", "block");
+        });
+
 
       counter++;
     }
