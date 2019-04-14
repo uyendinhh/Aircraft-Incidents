@@ -51,7 +51,7 @@ function start() {
   var data = d3.map();
   var colorScale = d3
     .scaleThreshold()
-    .domain([0, 20, 50, 100, 1000, 10000, 100000, 10000000, 500000000])
+    .domain([0, 1, 20, 50, 100, 200, 300])
     .range(d3.schemeBlues[7]);
 
   d3.queue()
