@@ -38,10 +38,6 @@ d3.csv("data/aircraft_incidents.csv", function(csv) {
     }
   }
 
-  console.log(phaseInjuries);
-  console.log(phases);
-  var chart = d3.select("graph3");
-
   var graphic = d3
     .select("#graph3_graphic")
     .append("svg")
@@ -84,7 +80,6 @@ d3.csv("data/aircraft_incidents.csv", function(csv) {
     .attr("font-size", "20px")
     .text(phases[0] + " - " + phaseInjuries[phases[0]] + " Total Fatalities");
 
-  console.log(plane);
   var planeYValues = [
     planeYScale(0),
     planeYScale(0),

@@ -32,20 +32,6 @@ function start() {
     .center([50, 50])
     .translate([width / 2, height / 2]);
 
-  // Create GeoPath function that uses built-in D3 functionality to turn
-  // lat/lon coordinates into screen coordinates
-  // var geoPath = d3.geoPath()
-  //     .projection(mapProjection);
-
-  // Classic D3... Select non-existent elements, bind the data, append the elements, and apply attributes
-  // g.selectAll("path")
-  //     .data(neighborhoods_json.features)
-  //     .enter()
-  //     .append("path")
-  //     .attr("fill", "#ccc")
-  //     .attr("stroke", "#333")
-  //     .attr("d", geoPath);
-
   // Load external data and boot
   // Data and color scale
   var data = d3.map();
@@ -145,8 +131,6 @@ function start() {
           currentYear = val.getFullYear();
           setData();
           setFill();
-          console.log(data);
-          console.log(currentYear);
         });
 
       var gTime = d3
