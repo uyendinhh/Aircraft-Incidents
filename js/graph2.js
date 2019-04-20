@@ -58,7 +58,7 @@ d3.csv("data/aircraft_incidents.csv", function(csv) {
   for (var make = 0; make < groupByMake.length; make++) {
     var models = groupByMake[make].values;
     for (var model = 0; model < models.length; model++) {
-      console.log(models[model].value);
+      // console.log(models[model].value);
       var scales = [];
       scales.push(d3.scaleLinear().domain([0, scaleMaxes[groupByMake[make].key].maxFatalities]).range([0, 100]));
       scales.push(d3.scaleLinear().domain([0, scaleMaxes[groupByMake[make].key].maxSerious]).range([0, 100]));
@@ -88,6 +88,7 @@ d3.csv("data/aircraft_incidents.csv", function(csv) {
         .call(star)
         .call(star.interaction);
 
+
       var interactionLabel = wrapper
         .append("div")
         .attr("class", "interaction label");
@@ -101,29 +102,33 @@ d3.csv("data/aircraft_incidents.csv", function(csv) {
         .selectAll(".interaction")
         .style("display", "none");
 
-      svg
-        .selectAll(".star-interaction")
-        .on("mouseover", function(d) {
-          svg.selectAll(".star-label").style("display", "none");
-
-          interaction.style("display", "block");
-
-          circle.attr("cx", d.x).attr("cy", d.y);
-
-          $interactionLabel = $(interactionLabel.node());
-          interactionLabel
-            .text(d.key + ": " + d.datum[d.key])
-            .style("left", d.xExtent - $interactionLabel.width() / 2)
-            .style("top", d.yExtent - $interactionLabel.height() / 2);
-        })
-        .on("mouseout", function(d) {
-          interaction.style("display", "none");
-
-          svg.selectAll(".star-label").style("display", "block");
-        });
+      
 
 
       counter++;
     }
   }
+  
+  var allStars = d3.select("#graph2")
+    .selectAll(".star-path")
+    .classed("star-path", false)
+    .classed("star-path-bombardier", function(d, i) {
+      return i <= 3
+    })
+    .classed("star-path-boeing", function(d, i) {
+      return i > 3 && i <= 12
+    })
+    .classed("star-path-mcdonnell", function(d, i) {
+      return i > 12 && i <= 18
+    })
+    .classed("star-path-embraer", function(d, i) {
+      return i > 18 && i <= 22
+    })
+    .classed("star-path-airbus", function(d, i) {
+      return i > 22
+    })
+
+
+  console.log(allStars);
+
 });
