@@ -32,12 +32,38 @@ body{
   stroke-width: 2px;
   stroke-dasharray: 4 5;
 }
-.star-path {
+.star-path-bombardier {
   stroke: #444;
   stroke-width: 2px;
   fill: #709CB1;
   fill-opacity: 0.6;
 }
+.star-path-boeing {
+  stroke: #444;
+  stroke-width: 2px;
+  fill: rgb(52, 187, 63);
+  fill-opacity: 0.6;
+}
+.star-path-mcdonnell {
+  stroke: #444;
+  stroke-width: 2px;
+  fill: rgb(201, 31, 201);
+  fill-opacity: 0.6;
+}
+.star-path-embraer {
+  stroke: #444;
+  stroke-width: 2px;
+  fill: rgb(204, 32, 32);
+  fill-opacity: 0.6;
+}
+.star-path-airbus {
+  stroke: #444;
+  stroke-width: 2px;
+  fill: rgb(231, 217, 22);
+  fill-opacity: 0.6;
+}
+
+
 
 .star-interaction {
   opacity: 0;

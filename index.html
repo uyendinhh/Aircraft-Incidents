@@ -27,20 +27,25 @@
 
 <body>
   <div class="container">
-    <h1>Aircraft Incidents</h1>
-    <h2>Graph 1 Title</h2>
-    <p>Graph 1 description</p>
+    <h1>Aircraft Incidents Safety Guide</h1>
+    <p>This visualization tries to inform any concerned passengers about fatal incidents over time, per airplane model, and per phase of flight.</p>
+    <h2>Incidents Over Time and Space</h2>
+    <p>Drag the slider to see a choropleth map of the world, coded by fatal incidents in the selected year.</p>
     <div id="graph1"></div>
     <div class="row align-items-center">
       <div class="col-sm">
         <div id="slider-time"></div>
       </div>
     </div>
-    <h2>Graph 2 Title</h2>
-    <p>Graph 2 description</p>
+    <h2>Airplane Model Statistics</h2>
+    <p>These star plots are color coded by manufacturer. Statistics are computed based on grouping by manufacturer as an attempt to keep a consistent scale. 
+      Note, certain models are simply more popular than others leading to higher statistics.
+    </p>
     <div id="graph2"></div>
-    <h2>Graph 3 Title</h2>
-    <p>Graph 3 description</p>
+    <h2>Phases of Flight</h2>
+    <p>Drag the slider to see the number of fatalities in each phase of flight. Note, many incidents have been excluded due to 
+      being uncategorized. If included, the majority of fatalities would be within the uncategorized group.
+    </p>
     <div id="graph3">
       <div id="graph3_graphic"></div>
       <div class="row align-items-center">
